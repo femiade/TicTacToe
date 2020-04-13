@@ -1,11 +1,21 @@
 # ---Global variables------
 
-#board
-board = [
-    "-","-","-",
-    "-","-","-",
-    "-","-","-"
-]
+
+board = ["-", "-", "-",
+         "-", "-", "-",
+         "-", "-", "-"
+        ]
+
+
+class player():
+
+    def __init__(self, name):
+        self.name = name
+
+
+X = player("X")
+O = player("O")
+
 
 
 def play_game():
@@ -13,7 +23,7 @@ def play_game():
     print(f'Welcome to Tic-Tac-Toe! X goes first.')
 
     game_still_going = False
-    current_player = "X"
+    current_player = X
 
     while not game_still_going:
 
@@ -29,6 +39,7 @@ def play_game():
 
 
 def display_board():
+    global board
     print("| " + board[0] + " | " + board[1] + " | " + board[2] + " |")
     print("| " + board[3] + " | " + board[4] + " | " + board[5] + " |")
     print("| " + board[6] + " | " + board[7] + " | " + board[8] + " |")
@@ -36,7 +47,7 @@ def display_board():
 
 def handle_turn(current_player):
 
-    print(current_player + '\'s turn.')
+    print(current_player.name + '\'s turn.')
     position = int(input(f'Choose a position (1-9) on the board: '))
 
     valid = False
@@ -48,7 +59,7 @@ def handle_turn(current_player):
         position = position - 1
         #add postion to the board based on player
         if board[position] == '-':
-            board[position] = current_player
+            board[position] = current_player.name
             valid = True
         else:
             position = int(input(f"You can't go there. Go again. "))
@@ -57,17 +68,17 @@ def handle_turn(current_player):
 
 def flip_player(current_player):
     #Switch player depending on current player
-    if current_player == "X":
-        current_player = "O"
+    if current_player == X:
+        current_player = O
     else:
-        current_player = "X"
+        current_player = X
     return current_player
 
 
 def check_is_game_over(current_player):
     #Check if there is a winner and stop the game
     if check_winner(current_player):
-        print(current_player + " won!")
+        print(current_player.name + " won!")
         game_still_going = True
     #check if there is a tie and stop the game
     elif check_tie(current_player):
@@ -89,13 +100,13 @@ def check_winner(current_player):
 
 def check_rows(current_player):
     #check if all the value match across a given row
-    if board[0] == board[1] == board[2] == current_player:
+    if board[0] == board[1] == board[2] == current_player.name:
         winner = current_player
 
-    elif board[3] == board[4] == board[5] == current_player:
+    elif board[3] == board[4] == board[5] == current_player.name:
         winner = current_player
 
-    elif board[6] == board[7] == board[8] == current_player:
+    elif board[6] == board[7] == board[8] == current_player.name:
         winner = current_player
     else:
         winner = None
@@ -104,13 +115,13 @@ def check_rows(current_player):
 
 def check_columns(current_player):
     # check if all the value match across a given column
-    if board[0] == board[3] == board[6] == current_player:
+    if board[0] == board[3] == board[6] == current_player.name:
         winner = current_player
 
-    elif board[1] == board[4] == board[7] == current_player:
+    elif board[1] == board[4] == board[7] == current_player.name:
         winner = current_player
 
-    elif board[2] == board[5] == board[8] == current_player:
+    elif board[2] == board[5] == board[8] == current_player.name:
         winner = current_player
     else:
         winner = None
@@ -119,10 +130,10 @@ def check_columns(current_player):
 
 def check_diagnols(current_player):
     # check if all the value match across a given diagnol
-    if board[0] == board[4] == board[8] == current_player:
+    if board[0] == board[4] == board[8] == current_player.name:
         winner = current_player
 
-    elif board[2] == board[4] == board[6] == current_player:
+    elif board[2] == board[4] == board[6] == current_player.name:
         winner = current_player
     else:
         winner = None
