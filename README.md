@@ -1,3 +1,3 @@
 # tictactoe
 
-Simple Tic-Tac-Toe script
+# Simple Tic-Tac-Toe script
